@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pop子与pipi美的个人主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        /* 页面背景 */
+        body {
+            background-color: #FFCDCE;
+			margin: 0;
+        }
+        /* 头部横幅 */
+         .banner {
+            width: 100%;
+            height: 700px;
+            position: relative; 
+            overflow: hidden; 
+        }
+		 .banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+        /* 导航栏 */
+        .nav-ul {
+            list-style: none;
+            width: 100%;
+            height: 70px;
+            line-height: 40px;
+            padding: 0 30px;
+            background-color: #FFCE00;
+			display:flex;
+			justify-content: center;
+			align-items: center;
+        }
+        .nav-ul li {
+            float: left;
+        }
+        .nav-ul li a {
+            display: block;
+            color: #35448A;
+            text-decoration: none;
+            padding: 0 50px;
+            text-align: center;
+        }
+        .nav-ul li a:hover {
+            background-color: #35448A;
+            color: #FFCE00;
+            height: 50px;
+        }
+        /* 主体容器 */
+       .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            border-left: 6px solid #35448A;
+            padding-left: 10px;
+			
+        }
+        /* 人物介绍标题 */
+        .title {
+            text-align: center;
+            font-size: 22px;
+            color: #FF69B4;
+            margin-bottom: 20px;
+            padding-bottom: 100px;
+            border-bottom: 2px solid #FFB6C1;
+        }
+        /* 角色卡片 */
+		.intro p {
+            line-height: 1.8;
+            color: #666;
+            text-indent: 0em;
+        }
+        .character {
+            display: flex;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #35448A;
+        } 
+        .character img {
+            width: 250px;
+            height: 250px;
+            margin-right: 50px;
+            object-fit: contain;
+        }
+        .character-info {
+            flex: ;
+            line-height: 1.8;
+            color: #333;
+        }
+        .character-info h3 {
+            color: #35448A;
+            margin-bottom: 10px;
+        }
+        /* 页脚 */
+        .footer {
+            width: 100%;
+            height: 80px;
+            background-color: #FFCE00;
+            color: #35448A;
+            text-align: center;
+            line-height: 80px;
+            font-size: 14px;
+        }
+/* 手机端适配规则 */
+@media (max-width: 768px) {
+    .banner { height: 300px; }
+    
+    .nav-ul {
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 5px 0;
+        justify-content: center;
+    }
+    .nav-ul li {
+        width: 50%;
+        float: none;
+    }
+    .nav-ul li a {
+        padding: 5px 10px;
+        width: 100%;
+        text-align: center;
+        line-height: 1.2;
+    }
+    .nav-ul li a:hover {
+        height: auto;
+    }
+
+    .container { width: 95%; }
+    
+    /* 角色卡片适配 - 图片最多占一半页面 */
+    .character {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .character img {
+        width: 50%;                /* 图片最多占一半页面 */
+        max-width: 250px;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 15px;
+    }
+    .character-info {
+        width: 100%;
+    }
+    
+    .footer {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 12px;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- 头部横幅 -->
+      <div class="banner">
+        <img src="个人网页图片/微信图片_20251018104429_115_12.jpg"> 
+    </div>
+    <!-- 导航栏 -->
+    <ul class="nav-ul">
+        <li><a href="./index.html"><b>我的首页</b></a ></li>
+        <li><a href="./我的简介.html"><b>我的简介</b></a ></li>
+        <li><a href="./我的日常.html"><b>我的日常</b></a ></li>
+        <li><a href="./资源下载与留言打卡.html"><b>资源下载与留言打卡<b></a></li>
+    </ul>
+    <!-- 主体内容 -->
+    <div class="container">
+        <div class="section">
+            <h2>自我介绍</h2>
+        <div class="intro">
+        <div class="character">
+            <img src="个人网页图片/微信图片_20251014202038_94_12.jpg" alt="pop子">
+            <div class="character-info">
+                <h3>姓名：pop子</h3>
+                <p>性别：女 <br>
+                年纪：14<br>
+                形象特征：身高较矮， 金发双马尾<br>
+                性格：嘴巴毒，讨厌另类的女子、虽然喜欢煽动别人，但是自己如果被惹到就会生气。笑起来很鬼畜、莫名其妙的暴躁<br>
+                怪癖：紧张时会吃柠檬<br>
+                担当：二人中的逗哏担当<br>
+                擅长：一边高台滑雪一边演奏木琴<br></p> 
+            </div>
+           </div>
+          </div>
+         </div>
+         <div class="intro">
+        <div class="character">
+            <img src="个人网页图片/微信图片_20251014202045_95_12.jpg" alt="pipi美">
+            <div class="character-info">
+                 <h3>姓名：pipi美</h3>
+                <p>性别：女 <br>
+                年纪：14<br>
+                形象：身高较高，蓝色长发<br>
+                怪癖：摸POP子的头后脖子变得相当之长<br>
+                担当：负责吐槽POP子的角色<br>
+                擅长：在用手机拍摄新年抽签时，按快门的手速很快<br>
+                喜欢做的事：喜欢POP子、经常花式表白POP子<br></p> 
+            </div>
+          </div>
+        </div>
+       </div>
+    <!-- 页脚 -->
+   <div class="footer"><b>生气了吗？生气了吗？生气了吗？</b></div>
+</body>
+</html>

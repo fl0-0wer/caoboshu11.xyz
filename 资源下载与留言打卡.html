@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pop子与pipi美的个人主页</title>
+    <style>
+    /* 1. 确保这段放在最上面，不受手机/电脑切换影响 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+		body{
+			background-color: #FFCDCE;
+			margin: 0;
+		}
+.comment-item.pinned {
+    background-color: #FFF9E6 !important;
+    /* 强制让置顶留言有区别 */
+}
+        /* 头部横幅 */
+        .banner {
+            width: 100%;
+            height: 700px;
+            position: relative; 
+            overflow: hidden; 
+        }
+		 .banner img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+        /* 导航栏 */
+        .nav-ul {
+            list-style: none;
+            width: 100%;
+            height: 70px;
+            line-height: 40px;
+            padding: 0 30px;
+            background-color: #FFCE00;
+			display:flex;
+			justify-content: center;
+			align-items: center;
+        }
+        .nav-ul li {
+            float: left;
+        }
+        .nav-ul li a {
+            display: block;
+            color: #35448A;
+            text-decoration: none;
+            padding: 0 50px;
+            text-align: center;
+        }
+        .nav-ul li a:hover {
+            background-color: #35448A;
+            color: #FFCE00;
+            height: 50px;
+        }
+        /* 主体内容 - 修改为与index.html相同的宽度 */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        /* 修改 h2 样式，使其与表单容器对齐 */
+        .content-block {
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+        .content-block h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            border-left: 6px solid #35448A;
+            padding-left: 10px;
+            margin-left: 0;
+            width: auto;
+        }
+        /* 介绍区域 */
+        .intro img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+		  /* 留言表单区域 - 修改为与index.html相同的宽度 */
+        .message-form, .download-section {
+            width: 100%;
+            margin: 30px 0;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .message-form h3 {
+            color: #35448A;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            color: #35448A;
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #35448A;
+            border-radius: 4px;
+            resize: none;
+        }
+        .form-group textarea {
+            height: 80px; /* 缩短输入框高度 */
+        }
+        .submit-btn {
+            background-color: #35448A;
+            color: #FFF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .pic-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        /* 页脚 */
+        .footer {
+            width: 100%;
+            height: 80px;
+            background-color: #FFCE00;
+            color: #35448A;
+            text-align: center;
+            line-height: 80px;
+            font-size: 14px;
+        }
+        
+        /* 资源下载标签页样式 */
+        .tab-container {
+            margin-bottom: 0px;
+        }
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #35448A;
+            margin-bottom: 15px;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            background-color: #f0f0f0;
+            border: none;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            cursor: pointer;
+            color: #35448A;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        .tab-btn.active {
+            background-color: #35448A;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* 评论区样式 */
+        .comments-section {
+            width: 100%;
+            margin: 30px 0;
+            background-color: #FFF;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .comments-section h3 {
+            color: #35448A;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .sort-controls select {
+            padding: 5px;
+            border: 1px solid #35448A;
+            border-radius: 4px;
+            background-color: white;
+        }
+        .comments-container {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .comment-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+        .comment-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        .comment-name {
+            font-weight: bold;
+            color: #35448A;
+        }
+        .comment-time {
+            font-size: 12px;
+            color: #999;
+        }
+        .comment-content {
+            line-height: 1.4;
+        }
+        
+        @media (max-width: 768px) {
+    .banner { height: 300px; }
+    
+    /* 导航栏适配 - 减小高度 */
+    .nav-ul {
+        height: auto;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 5px 0;
+        justify-content: center;
+        width: 100%;
+    }
+    .nav-ul li {
+        width: 50%;
+        float: none;
+    }
+    .nav-ul li a {
+        padding: 5px 10px;
+        width: 100%;
+        text-align: center;
+        line-height: 1.2;
+    }
+    .nav-ul li a:hover {
+        height: auto;
+    }
+
+    .container { width: 95%; }
+    
+    /* 手机端也使用相同的宽度 */
+    .content-block,
+    .message-form, 
+    .download-section,
+    .comments-section {
+        width: 100%;
+        margin: 0 0 20px 0;
+    }
+
+    .pic-grid {
+        grid-template-columns: 1fr !important; 
+        grid-auto-rows: auto;
+    }
+    
+    /* 手机端评论区样式调整 - 间距和字体变小 */
+    .comments-container {
+        max-height: 250px; /* 稍微减小高度 */
+        padding: 8px;
+    }
+    .comment-item {
+        padding: 6px; /* 减小内边距 */
+        margin-bottom: 6px; /* 减小间距 */
+        font-size: 13px; /* 减小字体大小 */
+    }
+    .comment-item:last-child {
+        margin-bottom: 0;
+    }
+    .comment-header {
+        margin-bottom: 3px; /* 减小标题与内容间距 */
+    }
+    .comment-name {
+        font-size: 14px; /* 名字字体稍小 */
+    }
+    .comment-time {
+        font-size: 11px; /* 时间字体更小 */
+    }
+    .comment-content {
+        line-height: 1.3; /* 行高稍小 */
+        font-size: 13px;
+    }
+    
+    /* 页脚适配 - 减小高度 */
+    .footer {
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        font-size: 12px;
+    }
+    
+    /* 标签页适配 */
+    .tab-buttons {
+        flex-wrap: wrap;
+    }
+    .tab-btn {
+        padding: 8px 12px;
+        margin-bottom: 5px;
+    }
+}
+/* --- 手机端：缩小评论区字体与间距 --- */
+            .comment-item {
+                padding: 6px;         /* 减小单条评论内的上下边距 */
+                margin-bottom: 6px;   /* 减小评论之间的距离 */
+            }
+            .comment-name {
+                font-size: 13px;      /* 缩小昵称字体 */
+            }
+            .comment-time {
+                font-size: 10px;      /* 缩小时间字体 */
+            }
+            .comment-content {
+                font-size: 12px;      /* 缩小正文字体 */
+                line-height: 1.3;     /* 让行间距更加紧凑 */
+            }
+            .comments-section h3 {
+                font-size: 16px;      /* 缩小评论区顶部的“最新留言”字体 */
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部横幅 -->
+      <div class="banner">
+        <img src="个人网页图片/微信图片_20251018104429_115_12.jpg" alt="banner图"> 
+    </div>
+    <!-- 导航栏 -->
+    <ul class="nav-ul">
+        <li><a href="./index.html"><b>我的首页</b></a ></li>
+        <li><a href="./我的简介.html"><b>我的简介</b></a ></li>
+        <li><a href="./我的日常.html"><b>我的日常</b></a ></li>
+        <li><a href="./资源下载与留言打卡.html"><b>资源下载与留言打卡<b></a></li>
+    </ul>
+
+    <!-- 主体内容 -->
+    <div class="container">
+        <div class="section">
+            <div class="intro">     
+            </div>
+        </div>
+
+        <!-- 图片展示区 -->
+        <div class="content-block">
+            <h2>资源下载</h2>
+            <div class="pic-grid">    
+            </div>
+        </div>
+        
+        <!-- 资源下载区 - 带标签页 -->
+        <div class="download-section">
+            <div class="tab-container">
+                <div class="tab-buttons">
+                    <button class="tab-btn active" onclick="openTab(event, '网安文件')">网安文件</button>
+                    <button class="tab-btn" onclick="openTab(event, '其他文件')">其他文件</button>
+                    <button class="tab-btn" onclick="openTab(event, '文档')">文档</button>
+                    <button class="tab-btn" onclick="openTab(event, '视频/音频/图片')">视频/音频/图片</button>
+                    <button class="tab-btn" onclick="openTab(event, '其他')">其他</button>
+                    
+                </div>
+                
+                <div id="网安文件" class="tab-content active">
+                    <p>💾 <a href="./download.php?file=nc64.exe">nc64.exe</a></p>
+                </div>
+                
+                <div id="其他文件" class="tab-content">
+                    <p>💾 <a href="./download.php?file=resource1.zip">Pop子表情包合集.zip</a></p>
+                    <p>💾 <a href="./download.php?file=pop_pipi_stickers.zip">Pop子&Pipi美动态表情包.zip</a></p>
+                </div>
+                
+                <div id="文档" class="tab-content">
+                    <p>📄 <a href="./download.php?file=manual.pdf">避难手册.pdf</a></p>
+                    <p>📄 <a href="./download.php?file=guide.docx">使用指南.docx</a></p>
+                </div>
+                
+                <div id="视频/音频/图片" class="tab-content">
+                    <p>📷 <a href="./download.php?file=BLs_first_long_distance.jpg">BLs_first_long_distance.jpg</a></p>
+                    <p>🎵 <a href="./download.php?file=bgm.mp3">背景音乐.mp3</a></p>
+                    <p>🎬 <a href="./download.php?file=trailer.mp4">预告片.mp4</a></p>
+                </div>
+                
+                <div id="其他" class="tab-content">
+                    <p><a>🈚️暂无</a></p>
+                </div>
+            </div>
+        </div>
+
+<div class="content-block">
+            <h2>留言打卡</h2>
+            <div class="pic-grid">    
+            </div>
+        </div>
+<!-- 留言表单 -->
+    <div class="message-form">
+        <h3>写下你的留言吧</h3>
+        <div class="form-group">
+            <label for="name">你的名字</label>
+            <input type="text" id="name" placeholder="请输入你的名字">
+        </div>
+        <div class="form-group">
+            <label for="content">留言内容</label>
+            <textarea id="content" placeholder="请输入你想说的话..."></textarea>
+        </div>
+        <button class="submit-btn" onclick="addComment()">发布留言</button>
+    </div>   
+        
+        <!-- 评论区 -->
+        <div class="comments-section">
+            <h3>
+                <span>最新留言</span>
+                <div class="sort-controls">
+                    <select id="sortOrder" onchange="sortComments()">
+                        <option value="newest">最新</option>
+                        <option value="oldest">最早</option>
+                    </select>
+                </div>
+            </h3>
+            <div class="comments-container" id="commentsContainer">
+                <!-- 评论将通过JavaScript动态添加 -->
+                <!--<div class="comment-item">-->
+                <!--    <div class="comment-header">-->
+                <!--        <span class="comment-name">访客1</span>-->
+                <!--        <span class="comment-time">2026-04-03 14:30</span>-->
+                <!--    </div>-->
+                <!--    <div class="comment-content">Pop子和Pipi美太可爱了！</div>-->
+                <!--</div>-->
+                <!--<div class="comment-item">-->
+                <!--    <div class="comment-header">-->
+                <!--        <span class="comment-name">ACG爱好者</span>-->
+                <!--        <span class="comment-time">2026-04-03 14:25</span>-->
+                <!--    </div>-->
+                <!--    <div class="comment-content">每天都来看你们，生气了吗？生气了吗？</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" id="adminTrigger"><b>生气了吗？生气了吗？生气了吗？</b></div>
+    
+    <script>
+        // 标签页切换功能
+        function openTab(evt, tabName) {
+            // 隐藏所有内容
+            var tabcontent = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // 移除所有按钮的active类
+            var tablinks = document.getElementsByClassName("tab-btn");
+            for (var i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // 显示当前标签页内容并激活按钮
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+        
+        // 评论相关功能
+        // 声明一个空的全局数组，准备接收数据库发来的数据
+        let comments = []; 
+        
+        // 管理员暗号存储在本地浏览器里
+function adminLogin() {
+    const key = prompt("请输入管理员暗号：");
+    if (key) {
+        localStorage.setItem('admin_token', key);
+        loadComments();
+    }
+}
+        // 【新增功能】：向服务器索要留言数据
+        function loadComments() {
+    const token = localStorage.getItem('admin_token') || '';
+    // 把暗号带给后端
+    fetch(`backend_api.php?action=get&token=${token}`)
+        .then(response => response.json())
+        .then(data => {
+            comments = data;
+            renderComments();
+        });
+}
+
+        function addComment() {
+            const nameInput = document.getElementById('name');
+            const contentInput = document.getElementById('content');
+            
+            if (nameInput.value.trim() === '' || contentInput.value.trim() === '') {
+                alert('请填写完整信息！');
+                return;
+            }
+            
+            // 将表单数据打包
+            const formData = new FormData();
+            formData.append('name', nameInput.value.trim());
+            formData.append('content', contentInput.value.trim());
+            
+            // 发送给后端的 'add' 接口
+            fetch('backend_api.php?action=add', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('发布留言成功！');
+                    nameInput.value = '';
+                    contentInput.value = '';
+                    // 留言成功后，重新从数据库拉取最新数据刷新页面
+                    loadComments(); 
+                } else {
+                    // 如果被 IP 限制，这里会弹出后端设定的报错信息
+                    alert(data.message); 
+                }
+            })
+            .catch(error => {
+                alert('网络连接错误，请稍后再试。');
+            });
+        }
+        
+        function sortComments() {
+            const sortOrder = document.getElementById('sortOrder').value;
+            
+            comments.sort((a, b) => {
+                // 第一优先级：提取置顶状态（强制转为数字，防范 undefined 或字符串 "1"）
+                const topA = Number(a.is_top) || 0;
+                const topB = Number(b.is_top) || 0;
+                
+                // 如果一个置顶一个没置顶，置顶的排前面
+                if (topA !== topB) {
+                    return topB - topA; // 因为 1 - 0 = 1，会让 B 往后排；0 - 1 = -1，会让 A 往后排
+                }
+                
+                // 第二优先级：如果置顶状态相同，则走正常的日期比对算法
+                const timeA = new Date(a.time).getTime();
+                const timeB = new Date(b.time).getTime();
+                
+                if (sortOrder === 'newest') {
+                    return timeB - timeA; // 最新发出的排在前面（降序）
+                } else {
+                    return timeA - timeB; // 最早发出的排在前面（升序）
+                }
+            });
+            
+            // 重新洗牌完成后，交给渲染器渲染
+            renderComments();
+        }
+        
+        function renderComments() {
+            const container = document.getElementById('commentsContainer');
+            if (!container) return;
+            container.innerHTML = '';
+
+            if (comments.length === 0) {
+                container.innerHTML = '<div style="padding:20px; text-align:center; color:#999;">暂时没有留言，快来抢沙发！</div>';
+                return;
+            }
+
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.className = 'comment-item';
+                
+                // --- 仅改变背景色，不再在名字前面加任何东西 ---
+                if (comment.is_top == 1) {
+                    commentElement.classList.add('pinned'); 
+                }
+
+                // --- 组装右下角的控制区与状态区 ---
+                let bottomControls = '';
+                
+                // 1. 本人或管理员可见的 [删除]
+                if (comment.can_manage) {
+                    bottomControls += `<button onclick="deleteMsg(${comment.id})" style="color:#ff4d4f; cursor:pointer; border:none; background:none; font-size:12px;">[删除]</button>`;
+                }
+
+                // 2. 所有人可见的静态 [置顶] 标志，紧跟在删除右边 (如果这条评论被置顶了)
+                if (comment.is_top == 1) {
+                    bottomControls += `<span style="color:#1890ff; font-weight:bold; font-size:12px; margin-left:10px;">[置顶]</span>`;
+                }
+
+                // 3. 管理员专属的操作按钮 (紧跟在最后面)
+                if (comment.is_admin) {
+                    const actionText = comment.is_top == 1 ? '[取消置顶]' : '[设为置顶]';
+                    bottomControls += `<button onclick="toggleTop(${comment.id})" style="color:#1890ff; cursor:pointer; margin-left:10px; border:none; background:none; font-size:12px;">${actionText}</button>`;
+                }
+
+                // 渲染 HTML，注意看顶部的名字区域已经非常干净了
+                commentElement.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-name">
+                            <strong>${comment.name}</strong>
+                        </span>
+                        <span class="comment-time" style="color:#999; font-size:12px;">${comment.time}</span>
+                    </div>
+                    <div class="comment-content" style="margin-top:10px; line-height:1.6; word-break:break-all;">
+                        ${comment.content}
+                    </div>
+                    <div style="text-align:right; margin-top:8px;">
+                        ${bottomControls}
+                    </div>
+                `;
+                container.appendChild(commentElement);
+            });
+        }
+        
+        // 页面打开时，不再直接 render，而是去服务器拉取数据
+        loadComments();
+        function deleteMsg(id) {
+    if(!confirm("确定要删除这条留言吗？")) return;
+    const token = localStorage.getItem('admin_token') || '';
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('token', token);
+
+    fetch('backend_api.php?action=delete', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => { if(data.success) loadComments(); });
+}
+
+function toggleTop(id) {
+    const token = localStorage.getItem('admin_token') || '';
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('token', token);
+
+    fetch('backend_api.php?action=toggle_top', { 
+        method: 'POST', 
+        body: formData 
+    })
+    .then(res => res.json())
+    .then(data => { 
+        if(data.success) {
+            // 找到刚才操作的那条评论，判断它是变成了置顶还是取消了
+            const comment = comments.find(c => c.id == id);
+            const statusText = comment.is_top == 1 ? "取消置顶" : "置顶";
+            alert("✅ " + statusText + "成功！");
+            loadComments(); // 重新刷新列表
+        } else {
+            alert("❌ 操作失败：" + (data.message || "权限不足"));
+        }
+    })
+    .catch(error => {
+        alert("❌ 网络错误，操作无法完成。");
+    });
+}
+// --- 管理员暗号登录逻辑 ---
+let clickCount = 0;
+let clickTimer = null;
+
+// 监听页脚点击
+document.getElementById('adminTrigger').addEventListener('click', function() {
+    clickCount++;
+    
+    // 如果是第一次点击，开启一个 3 秒的计时器
+    if (clickCount === 1) {
+        clickTimer = setTimeout(() => {
+            clickCount = 0; // 3 秒到了没点够，计数重置
+        }, 3000);
+    }
+
+    // 达成 5 连击成就
+    if (clickCount === 3) {
+        clearTimeout(clickTimer); // 清除计时器
+        clickCount = 0;           // 计数归零
+        adminLogin();             // 召唤输入框
+    }
+});
+
+function adminLogin() {
+    const key = prompt("【身份验证】请输入管理员暗号：");
+    if (key === null) return; // 用户点取消，啥也不干
+    
+    if (key.trim() !== "") {
+        localStorage.setItem('admin_token', key);
+        alert("身份切换成功，正在重新载入权限...");
+        loadComments(); // 触发后端权限校验并刷新列表
+    }
+}
+
+// 顺便教你一个“注销”管理员的方法：在 Console 输入 logout()
+function logout() {
+    localStorage.removeItem('admin_token');
+    alert("管理员已退出");
+    loadComments();
+}
+    </script>
+</body>
+</html>

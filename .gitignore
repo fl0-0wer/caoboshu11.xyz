@@ -1,0 +1,9 @@
+# 本地/服务器真实配置，绝不提交
+config.php
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
